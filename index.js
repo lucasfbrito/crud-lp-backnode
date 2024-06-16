@@ -1,3 +1,5 @@
+// index.js
+
 const express = require("express");
 const app = express();
 const { Pool } = require("pg");
@@ -12,7 +14,7 @@ app.use(express.json());
 const pool = new Pool({
   connectionString: config.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false
+    rejectUnauthorized: false // Usar solo en desarrollo, no recomendado para producción
   }
 });
 
@@ -110,7 +112,7 @@ app.get("/clientes", async (req, res) => {
   }
 });
 
-const PORT = config.PORT || 3000;
+const PORT = config.PORT;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
