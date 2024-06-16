@@ -14,7 +14,7 @@ app.use(express.json());
 const pool = new Pool({
   connectionString: config.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false // Usar solo en desarrollo, no recomendado para producción
+    rejectUnauthorized: true // Usar solo en desarrollo, no recomendado para producción
   }
 });
 
