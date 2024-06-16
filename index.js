@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const { Pool } = require("pg");
 const cors = require("cors");
-require('dotenv').config();
+const config = require("./config");
 
 // Middleware
 app.use(cors());
@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Configuración del Pool de PostgreSQL
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: config.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
@@ -110,7 +110,7 @@ app.get("/clientes", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = config.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
