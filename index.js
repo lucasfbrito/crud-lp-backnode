@@ -1,10 +1,9 @@
-// index.js
-
 const express = require("express");
 const app = express();
 const { Pool } = require("pg");
 const cors = require("cors");
 const config = require("./config");
+require('dotenv').config();
 
 // Middleware
 app.use(cors());
@@ -14,7 +13,7 @@ app.use(express.json());
 const pool = new Pool({
   connectionString: config.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: true // Usar solo en desarrollo, no recomendado para producción
+    rejectUnauthorized: false, // Permitir certificados autofirmados
   }
 });
 
@@ -112,7 +111,7 @@ app.get("/clientes", async (req, res) => {
   }
 });
 
-const PORT = config.PORT;
+const PORT = config.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
